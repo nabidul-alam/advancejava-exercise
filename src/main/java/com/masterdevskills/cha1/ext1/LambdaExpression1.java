@@ -46,7 +46,9 @@ public class LambdaExpression1 {
 	 * @see Predicate<String>
 	 */
 	public static boolean isStringEmpty(String value) {
-		throw new RuntimeException("NotImplementedYet");
+		Predicate<String> stringEmptyFilter = val -> val.isBlank();
+		return stringEmptyFilter.test(value);
+		//throw new RuntimeException("NotImplementedYet");
 	}
 
 	/**
