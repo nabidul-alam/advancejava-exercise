@@ -41,7 +41,10 @@ public class Exercises {
 	 * @see List#replaceAll(UnaryOperator)
 	 */
 	public static List<Integer> doubling(List<Integer> ints) {
-		throw new RuntimeException("NotYetImplemented");
+		UnaryOperator<Integer> operator = val -> val*2;
+		 ints.replaceAll(val -> val*2);
+		 return ints;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 
 	/**
