@@ -36,8 +36,9 @@ public class LambdaExpression1 {
 	 * @see Predicate<String>
 	 */
 	public static boolean checkMoreThan5Chars(String value) {
-
-		throw new RuntimeException("NotImplementedYet");
+		Predicate<String> predicate =  val -> val.length()>5;
+		return predicate.test(value);
+		//throw new RuntimeException("NotImplementedYet");
 	}
 
 	/* TODO 2: Write a lambda expression using Predicate<String> to check if string is empty or not
