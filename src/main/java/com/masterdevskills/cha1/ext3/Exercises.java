@@ -23,6 +23,7 @@
 package com.masterdevskills.cha1.ext3;
 
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
@@ -41,7 +42,10 @@ public class Exercises {
 	 * @see List#replaceAll(UnaryOperator)
 	 */
 	public static List<Integer> doubling(List<Integer> ints) {
-		throw new RuntimeException("NotYetImplemented");
+		UnaryOperator<Integer> operator = val -> val*2;
+		 ints.replaceAll(val -> val*2);
+		 return ints;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 
 	/**
@@ -52,7 +56,10 @@ public class Exercises {
 	 * @see List#replaceAll(UnaryOperator)
 	 */
 	public static List<String> addSuffix(List<String> items, String suffix) {
-		throw new RuntimeException("NotYetImplemented");
+		//UnaryOperator<String> operator = item -> item.concat(suffix);
+		items.replaceAll(item -> item.concat(suffix));
+		return items;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 
 	/***
@@ -61,7 +68,10 @@ public class Exercises {
 	 * @param people list of person
 	 * */
 	public static List<Person> sortItemByFirstNameOrderAscending(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+		Comparator<Person> comparator = ( p1,  p2) -> p1.getFirstName().compareTo(p2.getFirstName());
+		people.sort(comparator);
+		return people;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 
 	/**
@@ -70,7 +80,10 @@ public class Exercises {
 	 * @param people list of person
 	 */
 	public static List<Person> sortByLastNameOrderDescending(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+		//Comparator<Person> comparator = (p1, p2) -> -1 * p1.getLastName().compareTo(p2.getLastName());
+		people.sort((p1, p2) -> -1 * p1.getLastName().compareTo(p2.getLastName()));
+		return people;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 
 	/**
@@ -81,6 +94,15 @@ public class Exercises {
 	 * @param people list of person
 	 */
 	public static List<Person> sortByFirstNameAndThenLastNameAndThenAge(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+		Comparator<Person> compByFirstName = (p1, p2) -> p1.getFirstName().compareTo(p2.getFirstName());
+		Comparator<Person> compByLastName = (p1, p2) ->  p1.getLastName().compareTo(p2.getLastName());
+		Comparator<Person> compByAge = (p1, p2) ->  Integer.compare(p1.getAge(), p2.getAge());
+
+		Comparator<Person> comp = compByFirstName.thenComparing(compByLastName).thenComparing(compByAge);
+		people.sort(comp);
+
+
+		return people;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 }
