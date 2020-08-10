@@ -94,6 +94,15 @@ public class Exercises {
 	 * @param people list of person
 	 */
 	public static List<Person> sortByFirstNameAndThenLastNameAndThenAge(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+		Comparator<Person> compByFirstName = (p1, p2) -> p1.getFirstName().compareTo(p2.getFirstName());
+		Comparator<Person> compByLastName = (p1, p2) ->  p1.getLastName().compareTo(p2.getLastName());
+		Comparator<Person> compByAge = (p1, p2) ->  Integer.compare(p1.getAge(), p2.getAge());
+
+		Comparator<Person> comp = compByFirstName.thenComparing(compByLastName).thenComparing(compByAge);
+		people.sort(comp);
+
+
+		return people;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 }
