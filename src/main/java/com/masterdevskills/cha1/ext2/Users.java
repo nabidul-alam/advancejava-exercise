@@ -24,6 +24,7 @@ package com.masterdevskills.cha1.ext2;
 
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.*;
 
 /**
  * @author A N M Bazlur Rahman @bazlur_rahman
@@ -43,7 +44,10 @@ public class Users {
 	 * @see User#setStatus(Status)
 	 */
 	public static void activatedAll(List<User> users, Status status) {
-		throw new RuntimeException("NotImplemented");
+		//Consumer<User> consumer = user -> user.setStatus(status);
+		users.forEach(user -> user.setStatus(status));
+		System.out.println(users.get(1).getStatus());
+		//throw new RuntimeException("NotImplemented");
 	}
 
 	/**
