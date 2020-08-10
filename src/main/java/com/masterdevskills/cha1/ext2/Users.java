@@ -59,7 +59,7 @@ public class Users {
 	 * @see StringJoiner#add(CharSequence)
 	 * @see StringJoiner#toString()
 	 */
-
+	makeStringOfAllUsernames
 	public static String makeStringOfAllUsernames(List<User> users) {
 		StringJoiner stringJoiner = new StringJoiner(",");
 		Function<User, String> func = (user) -> user.toString();
