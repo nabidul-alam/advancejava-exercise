@@ -68,7 +68,7 @@ public class Exercises {
 	 * @param people list of person
 	 * */
 	public static List<Person> sortItemByFirstNameOrderAscending(List<Person> people) {
-		Comparator<Person> comparator = (Person p1, Person p2) -> p1.getFirstName().compareTo(p2.getFirstName());
+		Comparator<Person> comparator = ( p1,  p2) -> p1.getFirstName().compareTo(p2.getFirstName());
 		people.sort(comparator);
 		return people;
 		//throw new RuntimeException("NotYetImplemented");
@@ -80,7 +80,10 @@ public class Exercises {
 	 * @param people list of person
 	 */
 	public static List<Person> sortByLastNameOrderDescending(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+		//Comparator<Person> comparator = (p1, p2) -> -1 * p1.getLastName().compareTo(p2.getLastName());
+		people.sort((p1, p2) -> -1 * p1.getLastName().compareTo(p2.getLastName()));
+		return people;
+		//throw new RuntimeException("NotYetImplemented");
 	}
 
 	/**
