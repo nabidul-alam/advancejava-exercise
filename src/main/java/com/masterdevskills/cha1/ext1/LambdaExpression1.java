@@ -26,6 +26,7 @@ package com.masterdevskills.cha1.ext1;
 
 
 import java.util.function.Predicate;
+import java.util.function.*;
 
 public class LambdaExpression1 {
 
@@ -58,6 +59,8 @@ public class LambdaExpression1 {
 	 * @see Predicate<String>
 	 */
 	public static String convertToUpperCase(String text) {
-		throw new RuntimeException("NotImplementedYet");
+		Function<String, String> filterToUpperCase = str -> str.toUpperCase();
+		return filterToUpperCase.apply(text);
+		//throw new RuntimeException("NotImplementedYet");
 	}
 }
