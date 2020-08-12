@@ -35,13 +35,30 @@ public class LambdaExpression2 {
 	 * use this functional interface as argument of the following method and log
 	 * the time it takes to execute the method
 	 */
-	public void executionTime() {
+	public void executionTime(Executable executable) {
+		long l = System.nanoTime();
+		executable.execute();
+
+		System.out.println(System.nanoTime() - l);
 		//TODO add your code here;
 	}
 
 	/* TODO: use the above of method here
 	 */
 	public void run() {
-		//executionTime();
+		/*Executable executable = new Executable() {
+			@Override
+			public void execute() {
+				for (int i = 0; i < 100; i++) {
+					//blah
+				}
+			}
+		};*/
+		executionTime(() -> {
+			for (int i = 0; i < 100; i++) {
+				//blah
+			}
+		});
 	}
+
 }
