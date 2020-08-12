@@ -53,11 +53,10 @@ class FileProcessorTest {
 	}
 
 	@Test
-	void testWriteToFile() {
+	void testWriteToFile() throws IOException {
 		var lines = fileProcessor.readFileFrom(readFrom.getPath());
 		fileProcessor.writeToFile(lines, writeTo.getPath());
 		var writtenLine = fileProcessor.readFileFrom(writeTo.getPath());
-
 		assertEquals(writtenLine.size(), lines.size());
 	}
 }
