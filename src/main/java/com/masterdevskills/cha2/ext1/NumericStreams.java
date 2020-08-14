@@ -26,7 +26,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.*;
 
 /**
  * @author A N M Bazlur Rahman @bazlur_rahman
@@ -44,7 +46,11 @@ public class NumericStreams {
 	 * @see Stream#collect(Collector)
 	 */
 	public static List<Integer> generate(int series) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		  return Stream
+				  .iterate(new int[]{1, 1}, n -> new int[]{n[1], n[0] + n[1] })
+				  .limit(series)
+				  .map(num -> num[0])
+				  .collect(Collectors.toList());
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 }
