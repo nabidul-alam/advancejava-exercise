@@ -79,8 +79,11 @@ public class RealMovieService {
 	 */
 
 	public List<Movie> findAllMovieRated(String rated) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getRated().equals(rated))
+				.collect(Collectors.toList());
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
