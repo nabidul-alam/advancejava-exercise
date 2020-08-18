@@ -125,8 +125,11 @@ public class RealMovieService {
 	 * @see java.util.stream.Stream#collect(Collector)
 	 */
 	public List<Movie> findMoviesOfDirector(String director) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getDirector().equals(director))
+				.collect(Collectors.toList());
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
@@ -136,8 +139,12 @@ public class RealMovieService {
 	 * @return list of Movie Title of those movies whose rating is equal to given rating
 	 */
 	public List<String> listMovieTitleRated(String rated) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getRated().equals(rated))
+				.map(movie -> movie.getTitle())
+				.collect(Collectors.toList());
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
@@ -150,8 +157,14 @@ public class RealMovieService {
 	 * @see Stream#distinct()
 	 */
 	public List<String> listUniqueMovieTitleRated(String rated) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getRated().equals(rated))
+				.map(movie -> movie.getTitle())
+				.distinct()
+				.collect(Collectors.toList())
+				;
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
