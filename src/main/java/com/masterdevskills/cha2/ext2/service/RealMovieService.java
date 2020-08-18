@@ -109,8 +109,11 @@ public class RealMovieService {
 	 * @see java.util.stream.Stream#collect(Collector)
 	 */
 	public List<Movie> findMoviesWithImdbRatingEqualAndGreaterThan(double rating) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getImdbRating()>=rating)
+				.collect(Collectors.toList());
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
