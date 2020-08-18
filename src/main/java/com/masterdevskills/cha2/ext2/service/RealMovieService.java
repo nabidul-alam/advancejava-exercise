@@ -34,6 +34,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.Comparator.comparing;
+
 /**
  * @author A N M Bazlur Rahman @bazlur_rahman
  * @since 07 August 2020
@@ -175,8 +177,13 @@ public class RealMovieService {
 	 * @see Stream#findAny()
 	 */
 	public Optional<String> findAnyMovieTitleWithImdbRatingEqualOrGreater(double rating) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		//check with test case; there may be a problem in test case
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getImdbRating()>=rating)
+				.map(movie -> movie.getTitle())
+				.findAny();
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
@@ -188,8 +195,13 @@ public class RealMovieService {
 	 * @see Stream#map(Function)
 	 */
 	public Optional<String> findFirstMovieTitleWithImdbRatingEqualOrGreater(double rating) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		//check with test case; there may be a problem in test case
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getImdbRating()>=rating)
+				.map(movie -> movie.getTitle())
+				.findFirst();
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
@@ -199,7 +211,19 @@ public class RealMovieService {
 	 * @see Stream#sorted(Comparator)
 	 */
 	public List<Movie> sortMovieByTitle() {
-		throw new RuntimeException("TODO://ImplementIt");
+		Comparator<Movie> comparator = new Comparator<>() {
+			@Override
+			public int compare(Movie o1, Movie o2) {
+				return o1.getTitle().compareTo(o2.getTitle());
+			}
+		};
+		Comparator<Movie> comparator1 = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
+
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.sorted(comparing(Movie::getTitle))
+				.collect(Collectors.toList());
+	//	throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
@@ -210,8 +234,15 @@ public class RealMovieService {
 	 * @see Comparator#thenComparing(Function)
 	 */
 	public List<Movie> sortByImdbRatingAndThenTitle() {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		Comparator<Movie> comparatorRating = (o1, o2) -> o1.getImdbRating().compareTo(o2.getImdbRating());
+		Comparator<Movie> comparatorTitle = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
+		Comparator<Movie> cmp = comparatorRating.thenComparing(comparatorTitle);
+		//comparing(Movie::getImdbRating).thenComparing(Movie::getTitle)
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.sorted(comparing(Movie::getImdbRating).thenComparing(Movie::getTitle))
+				.collect(Collectors.toList());
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
