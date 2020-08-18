@@ -31,6 +31,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -61,8 +62,11 @@ public class RealMovieService {
 	 * @see java.util.stream.Stream#collect(Collector)
 	 */
 	public List<Movie> findAllMoviesInYear(int year) {
-
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.filter(movie -> movie.getYear().equals(Integer.toString(year)))
+				.collect(Collectors.toList());
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
