@@ -33,6 +33,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.function.*;
+import java.util.*;
 
 import static java.util.Comparator.comparing;
 
@@ -197,6 +199,7 @@ public class RealMovieService {
 	public Optional<String> findFirstMovieTitleWithImdbRatingEqualOrGreater(double rating) {
 		//check with test case; there may be a problem in test case
 		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+
 		return  allMovies.stream()
 				.filter(movie -> movie.getImdbRating()>=rating)
 				.map(movie -> movie.getTitle())
@@ -253,7 +256,10 @@ public class RealMovieService {
 	 */
 
 	public Optional<Movie> findTopRatedMovie() {
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.max(comparing(Movie::getImdbRating));
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
@@ -263,7 +269,10 @@ public class RealMovieService {
 	 */
 
 	public Optional<Movie> findMinRatedMovie() {
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return  allMovies.stream()
+				.min(comparing(Movie::getImdbRating));
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 
 	/**
@@ -273,6 +282,19 @@ public class RealMovieService {
 	 */
 
 	public Map<String, Long> findNumberOfDistinctMoviesOfEachDirector() {
+		Map<String, Long> map = new HashMap<>();
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		/*Map<String, List<Movie>> collect =
+				allMovies
+						.stream()
+						.distinct()
+						.collect(Colle)
+						.collect(Collectors.groupingBy(Movie::getDirector));
+
+		allMovies.stream()
+				.collect(Collectors.toMap(Movie::getDirector, Movie::getImdbRating))*/
+
+
 		throw new RuntimeException("TODO://ImplementIt");
 	}
 
@@ -282,7 +304,12 @@ public class RealMovieService {
 	 * @return map containing year and movie tiles comma separated
 	 */
 	public Map<String, String> getMoviesByYear() {
-		throw new RuntimeException("TODO://ImplementIt");
+		var allMovies = InMemoryMovieService.getInstance().findAllMovies();
+		return allMovies
+				.stream()
+				.collect(Collectors.toMap(Movie::getYear, Movie::getTitle,
+						(a, b) -> a + ", " + b));
+		//throw new RuntimeException("TODO://ImplementIt");
 	}
 }
 
